@@ -1,7 +1,7 @@
 {
-    "packageUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/master/samples/data/files",
-    "remoteVersionUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/master/samples/data/version.manifest",
-    "remoteManifestUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/master/samples/data/project.manifest",
+    "packageUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/v2.0/samples/data/files",
+    "remoteVersionUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/latest/samples/data/version.manifest",
+    "remoteManifestUrl" : "http://cdn.rawgit.com/cpascal/cocos2d-x-rupdate/latest/samples/data/project.manifest",
     "version" : "2.0.0",
     "engineVersion" : "cocos2d-x-3.8",
 
