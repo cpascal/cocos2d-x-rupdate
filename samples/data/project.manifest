@@ -6,7 +6,7 @@
     "engineVersion" : "cocos2d-x-3.8",
 
     "assets" : {
-        "Images/HelloWorld.jpg" : {
+        "Images/HelloWorld.png" : {
             "md5" : "..."
         },
         "grass.zip" : {

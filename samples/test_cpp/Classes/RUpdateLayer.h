@@ -9,7 +9,8 @@ class RUpdateLayer : public cocos2d::Layer
 public:
     virtual bool init();
     
-	void onLoadEnd();
+	void onLoadSucceed();
+	void onLoadFailed();
 	void startDownloadCallback(cocos2d::Ref* sender);
 	
 	// implement the "static create()" method manually

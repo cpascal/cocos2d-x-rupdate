@@ -39,17 +39,21 @@ bool RUpdateLayer::init()
     return true;
 }
 
-void RUpdateLayer::onLoadEnd()
+void RUpdateLayer::onLoadSucceed()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	//removeChild(_loadLayer, true);
-	//_loadLayer = nullptr;
-
 	auto backgroundSprite = Sprite::create("grass.png");
 	addChild(backgroundSprite, 1);
 	backgroundSprite->setPosition(origin.x + (visibleSize.width / 2.0f), origin.y + (visibleSize.height / 2.0f));
+
+	_progress->setString("Succeed!");
+}
+
+void RUpdateLayer::onLoadFailed()
+{
+	_progress->setString("Failed!");
 }
 
 void RUpdateLayer::startDownloadCallback(Ref* sender)
@@ -60,7 +64,7 @@ void RUpdateLayer::startDownloadCallback(Ref* sender)
 	if (!_am->getLocalManifest()->isLoaded())
 	{
 		CCLOG("Fail to update assets, step skipped.");
-		onLoadEnd();
+		onLoadFailed();
 	}
 	else
 	{
@@ -71,7 +75,7 @@ void RUpdateLayer::startDownloadCallback(Ref* sender)
 			case EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST:
 			{
 				CCLOG("No local manifest file found, skip assets update.");
-				this->onLoadEnd();
+				this->onLoadSucceed();
 			}
 			break;
 			case EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION:
@@ -100,14 +104,14 @@ void RUpdateLayer::startDownloadCallback(Ref* sender)
 			case EventAssetsManagerEx::EventCode::ERROR_PARSE_MANIFEST:
 			{
 				CCLOG("Fail to download manifest file, update skipped.");
-				this->onLoadEnd();
+				this->onLoadFailed();
 			}
 			break;
 			case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
 			case EventAssetsManagerEx::EventCode::UPDATE_FINISHED:
 			{
 				CCLOG("Update finished. %s", event->getMessage().c_str());
-				this->onLoadEnd();
+				this->onLoadSucceed();
 			}
 			break;
 			case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
@@ -123,7 +127,7 @@ void RUpdateLayer::startDownloadCallback(Ref* sender)
 				{
 					CCLOG("Reach maximum fail count, exit update process");
 					failCount = 0;
-					this->onLoadEnd();
+					this->onLoadFailed();
 				}
 			}
 			break;
